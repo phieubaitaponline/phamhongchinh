@@ -528,6 +528,12 @@ header.topbar{background:rgba(255,255,255,.66); border-bottom:2px solid rgba(190
 .gui-tt{margin:16px auto 0;max-width:640px;padding:10px 16px;border-radius:12px;font-weight:700;text-align:center;line-height:1.45;background:#FFF6E0;color:#7A5200;border:1px solid #F3DFA8}
 .gui-tt:empty{display:none}
 .gui-tt.xong{background:#E6F6EA;color:#1E6B34;border-color:#BFE3C8}
+/* === VA_CAN 28/11/2026: dấu căn nối liền === */
+.sqrt{display:inline-flex;align-items:stretch;vertical-align:middle;white-space:nowrap;margin:0 .06em;}
+.sqrt .rs{width:.62em;flex:0 0 .62em;height:auto;overflow:visible;}
+.sqrt .rs path{fill:none;stroke:currentColor;stroke-width:2px;vector-effect:non-scaling-stroke;stroke-linejoin:round;}
+.sqrt .rad{border-top:2px solid currentColor;padding:.1em .12em 0 .08em;margin-left:0;line-height:1.2;display:inline-block;}
+.frac .sqrt{vertical-align:baseline;}
 </style></head>
 <body class="part-nhan-biet">
 <header class="topbar">
@@ -589,7 +595,7 @@ function mathHTML(h){ const re=/⟦(f|sup|sub|rad|g|v):([^⟦⟧]*)⟧/; let m, 
   while((m=h.match(re))&&g++<200){ let r; const b=m[2];
     if(m[1]==='f'){const k=b.indexOf('|'); r=`<span class="frac"><span class="fn">${b.slice(0,k)}</span><span class="fd">${b.slice(k+1)}</span></span>`;}
     else if(m[1]==='g') r=`<span class="goc">${b}</span>`; else if(m[1]==='v') r=`<span class="vec">${b}</span>`; else if(m[1]==='sup') r=`<sup>${b}</sup>`; else if(m[1]==='sub') r=`<sub>${b}</sub>`;
-    else r=`<span class="sqrt">√<span class="rad">${b}</span></span>`;
+    else r=`<span class="sqrt"><svg class="rs" viewBox="0 0 10 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0.5 12.5 L3 11 L6 19.5 L10 0.6"/></svg><span class="rad">${b}</span></span>`;
     h=h.slice(0,m.index)+r+h.slice(m.index+m[0].length);} return h; }
 const SUPMAP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','n':'ⁿ','m':'ᵐ','k':'ᵏ','+':'⁺','-':'⁻','−':'⁻'};
 function mathText(t){ let s=String(t==null?'':t), m, g=0; const re=/⟦(f|sup|sub|rad|g|v):([^⟦⟧]*)⟧/;
